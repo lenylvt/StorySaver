@@ -27,7 +27,9 @@ jobs:
 
     - name: exécuter snapchat-dl
       run: |
-        snapchat-dl -P downloads hachemi95 zinedineblc2 feliccia_gul
+        snapchat-dl -P downloads hachemi95
+        snapchat-dl -P downloads zinedineblc2
+        snapchat-dl -P downloads feliccia_gul
 
     - name: installer awscli
       run: pip install awscli

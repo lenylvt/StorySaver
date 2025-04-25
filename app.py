@@ -6,12 +6,16 @@ import os
 from botocore.exceptions import ClientError
 import pandas as pd
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Chargement des variables d'environnement
+load_dotenv()
 
 # Configuration
-ACCOUNT_ID = '5b4ba7caa456bf4c1d7f4fbd5d20c880'
-ACCESS_KEY = 'f99c3f1f0cbfccdb77df487e67f382c6'
-SECRET_KEY = 'd962d4b783f65b59adadb47b7181feaa05c0d1c6744508686b8c34b23bee5ed2'
-BUCKET_NAME = 'story'
+ACCOUNT_ID = os.environ.get('R2_ENDPOINT_ID')
+ACCESS_KEY = os.environ.get('R2_ACCESS_KEY_ID')
+SECRET_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
+BUCKET_NAME = os.environ.get('R2_BUCKET_NAME')
 ENDPOINT_URL = f'https://{ACCOUNT_ID}.r2.cloudflarestorage.com'
 
 # Initialisation du client S3 (compatible avec R2)

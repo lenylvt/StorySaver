@@ -20,7 +20,7 @@ jobs:
 
     - name: install snapchat-dl
       run: |
-        pip install git+git://github.com/skyme5/snapchat-dl
+        pip install snapchat-dl
 
     - name: run snapchat-dl
       run: |

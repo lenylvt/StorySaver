@@ -1,6 +1,7 @@
 # 📱 StorySaver - Visualiseur de Stories
 
 Une application Streamlit pour visualiser et explorer les stories récupérées depuis Cloudflare R2.
+Pour le R2 surveiller les GO (10go gratuit) et les Operations (Class A : max 30k/J, Class B : max 300k/J pour ne rien payer)
 
 ## Fonctionnalités
 

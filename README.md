@@ -10,6 +10,17 @@ Une application Streamlit pour visualiser et explorer les stories récupérées 
 - Téléchargement des fichiers
 - Interface responsive et intuitive
 
+## Configuration de l'environnement
+
+L'application utilise Cloudflare R2 pour le stockage des fichiers. Vous devez configurer les variables d'environnement suivantes dans un fichier `.env` à la racine du projet :
+
+```
+R2_ENDPOINT_ID=votre_endpoint_id
+R2_ACCESS_KEY_ID=votre_access_key
+R2_SECRET_ACCESS_KEY=votre_secret_key
+R2_BUCKET_NAME=nom_du_bucket
+```
+
 ## Installation
 
 1. Clonez ce dépôt :
@@ -25,17 +36,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Configuration
-
-Les informations de connexion à Cloudflare R2 sont définies dans le fichier `app.py` :
-
-```python
-ACCOUNT_ID = '5b4ba7caa456bf4c1d7f4fbd5d20c880'
-ACCESS_KEY = 'f99c3f1f0cbfccdb77df487e67f382c6'
-SECRET_KEY = 'd962d4b783f65b59adadb47b7181feaa05c0d1c6744508686b8c34b23bee5ed2'
-BUCKET_NAME = 'story'
-ENDPOINT_URL = f'https://{ACCOUNT_ID}.r2.cloudflarestorage.com'
-```
+3. Créez un fichier `.env` avec vos informations d'authentification
 
 ## Lancement de l'application
 
@@ -65,4 +66,13 @@ BUCKET/story/(nom_utilisateur)/(date)/(date_heure)_(id)_(nom_utilisateur).(jpg|m
 Exemple :
 ```
 story/zinedineblc2/2025-04-24/2025-04-24_16-15-56 P28znZ8LS1aoSWK38h6OBgAAgZm9odGt3ZWJmAZZolZciAZZolZbVAAAAAA zinedineblc2.mp4
-``` 
+```
+
+## Utilisation de Repository Secrets
+
+Si vous déployez cette application, utilisez les Repository Secrets pour stocker les informations sensibles :
+
+- R2_ENDPOINT_ID
+- R2_ACCESS_KEY_ID
+- R2_SECRET_ACCESS_KEY
+- R2_BUCKET_NAME 

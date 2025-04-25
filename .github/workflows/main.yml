@@ -25,7 +25,7 @@ jobs:
     - name: run snapchat-dl
       run: |
         mkdir -p downloads
-        snapchat-dl -d -P downloads hachemi95
+        snapchat-dl -d -P downloads faressalvatores
 
     - name: upload to cloudflare r2
       uses: jakejarvis/s3-sync-action@v0.5.1

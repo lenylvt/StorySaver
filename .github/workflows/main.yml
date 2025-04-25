@@ -2,7 +2,7 @@ name: snapchat story saver
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # toutes les 10 minutes
+    - cron: "*/30 * * * *"  # toutes les 30 minutes
   workflow_dispatch:        # exécution manuelle possible
 
 jobs:

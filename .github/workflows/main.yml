@@ -1,39 +1,42 @@
-name: snapchat-dl automation
+name: snapchat story saver
 
 on:
   schedule:
-    - cron: "*/10 * * * *" # toutes les 10 minutes
-  workflow_dispatch: # permet de lancer manuellement
+    - cron: "*/10 * * * *"  # toutes les 10 minutes
+  workflow_dispatch:        # exécution manuelle possible
 
 jobs:
-  download-and-upload:
+  run-snapchat-dl:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout repo
+    - name: checkout du repo
       uses: actions/checkout@v3
 
-    - name: setup python
+    - name: installer python
       uses: actions/setup-python@v4
       with:
         python-version: "3.9"
 
-    - name: install snapchat-dl
+    - name: installer snapchat-dl
       run: |
-        pip install snapchat-dl
+        pip install git+git://github.com/skyme5/snapchat-dl
 
-    - name: run snapchat-dl
+    - name: créer dossier de téléchargement
+      run: mkdir -p downloads
+
+    - name: exécuter snapchat-dl
       run: |
-        mkdir -p downloads
         snapchat-dl -d -P downloads faressalvatores
 
-    - name: upload to cloudflare r2
-      uses: jakejarvis/s3-sync-action@v0.5.1
-      with:
-        args: --acl public-read --follow-symlinks --delete
+    - name: installer awscli
+      run: pip install awscli
+
+    - name: uploader vers cloudflare r2
       env:
-        AWS_S3_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
         AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        AWS_REGION: auto
-        SOURCE_DIR: downloads/
+      run: |
+        aws configure set default.region auto
+        aws s3 sync downloads/ s3://$R2_BUCKET_NAME/story \
+          --endpoint-url https://${{ secrets.R2_ENDPOINT_ID }}.r2.cloudflarestorage.com
